@@ -53,11 +53,14 @@ echo "http://example.com" | nuclei -t cookie-extractor.yaml  | cut -d "=" -f 2 |
 ```bash
 while read target; do
   echo "[*] Checking: $target"
-  findings=$(echo "$target" | nuclei -t cookie-extractor.yaml)
+  findings=$(echo "$target" | nuclei -t cookie-extractor.yaml -silent)
   if [ -n "$findings" ]; then
     echo "$findings" | cut -d "=" -f 2 | cut -d ";" -f 1 | while read cookie; do
-      echo "[+] Target: $target | Cookie: $cookie"
-      ./cookiemonster -cookie "$cookie"
+      output=$(cookiemonster -cookie "$cookie")
+      if echo "$output" | grep -q "Success" && ! echo "$output" | grep -q "Sorry"; then
+        echo "[+] Target: $target | Cookie: $cookie"
+        echo "$output"
+      fi
     done
   fi
 done < targets.txt
