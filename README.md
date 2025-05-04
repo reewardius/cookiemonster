@@ -46,11 +46,22 @@ An example of using the CLI with a static cookie, or with a URL:
 ✅ Success! I discovered the key for this cookie with the django decoder; it is "changeme".
 ```
 
-```
+```bash
 echo "http://example.com" | nuclei -t cookie-extractor.yaml  | cut -d "=" -f 2 | cut -d ";" -f 1 > cookies && for cookie in $(cat cookies); do ./cookiemonster -cookie $cookie; done
 ```
 ![image](https://github.com/reewardius/cookiemonster/assets/68978608/b4b66e0c-c622-462e-962e-0a8f680c6fe9)
-
+```bash
+while read target; do
+  echo "[*] Checking: $target"
+  findings=$(echo "$target" | nuclei -t cookie-extractor.yaml)
+  if [ -n "$findings" ]; then
+    echo "$findings" | cut -d "=" -f 2 | cut -d ";" -f 1 | while read cookie; do
+      echo "[+] Target: $target | Cookie: $cookie"
+      ./cookiemonster -cookie "$cookie"
+    done
+  fi
+done < targets.txt
+```
 
 ## Express support
 CookieMonster is capable of supporting cookies signed with `cookie-session`, which is common with Express. However, it does several strange things that require care in order to use this tool. A common response from a `cookie-session` application looks like this:
