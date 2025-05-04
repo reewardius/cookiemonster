@@ -45,12 +45,20 @@ An example of using the CLI with a static cookie, or with a URL:
 ℹ️ CookieMonster loaded the default wordlist; it has 38919 entries.
 ✅ Success! I discovered the key for this cookie with the django decoder; it is "changeme".
 ```
-
+---
+**Single scanning for one target**
 ```bash
 echo "http://example.com" | nuclei -t cookie-extractor.yaml  | cut -d "=" -f 2 | cut -d ";" -f 1 > cookies && for cookie in $(cat cookies); do ./cookiemonster -cookie $cookie; done
 ```
 ![image](https://github.com/reewardius/cookiemonster/assets/68978608/b4b66e0c-c622-462e-962e-0a8f680c6fe9)
+---
+**Mass scanning for multiple targets**
+```
+subfinder -d target.com -all -silent -o subs.txt && httpx -l subs.txt -o targets.txt
+chmod +x cookie.sh && bash cookie.sh
+```
 ```bash
+# bash cookie.sh
 while read target; do
   echo "[*] Checking: $target"
   findings=$(echo "$target" | nuclei -t cookie-extractor.yaml -silent)
@@ -65,6 +73,8 @@ while read target; do
   fi
 done < targets.txt
 ```
+![image](https://github.com/user-attachments/assets/0f212ee0-7018-4c4b-8632-ab4834d73261)
+---
 
 ## Express support
 CookieMonster is capable of supporting cookies signed with `cookie-session`, which is common with Express. However, it does several strange things that require care in order to use this tool. A common response from a `cookie-session` application looks like this:
