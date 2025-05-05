@@ -14,7 +14,7 @@ fi
 while IFS= read -r target; do
   echo "[*] Checking: $target"
 
-  findings=$(echo "$target" | nuclei -t cookie-extractor.yaml -silent)
+  findings=$(echo "$target" | nuclei -t cookie-monster-extended.yaml -silent)
 
   if [ -n "$findings" ]; then
     echo "$findings" \
