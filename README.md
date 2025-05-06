@@ -78,10 +78,11 @@ done < targets.txt
 ```
 ![image](https://github.com/user-attachments/assets/0f212ee0-7018-4c4b-8632-ab4834d73261)
 ---
-**Advanced Cookie Scanning + Debug Mode**
+**Advanced Cookie Scanning (Debug Mode/Express Support)**
 ```
 bash cookiemonster.sh
 bash cookiemonster.sh -debug
+bash cookiemonster.sh -express
 ```
 
 ## Express support
