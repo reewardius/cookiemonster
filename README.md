@@ -78,6 +78,11 @@ done < targets.txt
 ```
 ![image](https://github.com/user-attachments/assets/0f212ee0-7018-4c4b-8632-ab4834d73261)
 ---
+**Advanced Cookie Scanning + Debug Mode**
+```
+bash cookiemonster.sh
+bash cookiemonster.sh -debug
+```
 
 ## Express support
 CookieMonster is capable of supporting cookies signed with `cookie-session`, which is common with Express. However, it does several strange things that require care in order to use this tool. A common response from a `cookie-session` application looks like this:
