@@ -25,10 +25,7 @@ http:
       - "{{BaseURL}}/profile"
       - "{{BaseURL}}/user"
       - "{{BaseURL}}/dashboard"
-      - "{{BaseURL}}/api/auth"
-      - "{{BaseURL}}/api/login"
-      - "{{BaseURL}}/api/v1/auth"
-      - "{{BaseURL}}/api/v2/login"
+      
     extractors:
       - type: kval
         part: header
