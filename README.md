@@ -54,7 +54,7 @@ echo "http://example.com" | nuclei -t cookie-extractor.yaml  | cut -d "=" -f 2 |
 ---
 **Mass scanning for multiple targets**
 ```
-subfinder -d target.com -all -silent -o subs.txt && httpx -l subs.txt -o targets.txt
+subfinder -d target.com -all -silent -o subs.txt && httpx -l subs.txt -o alive_http_services.txt
 chmod +x cookie.sh && bash cookie.sh
 ```
 ```bash
