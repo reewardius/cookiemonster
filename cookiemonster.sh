@@ -79,4 +79,4 @@ while IFS= read -r target; do
       fi
     done
   fi
-done < targets.txt
+done < alive_http_services.txt
