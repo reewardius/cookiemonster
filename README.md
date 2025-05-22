@@ -74,7 +74,7 @@ while read target; do
       fi
     done
   fi
-done < targets.txt
+done < alive_http_services.txt
 ```
 ![image](https://github.com/user-attachments/assets/0f212ee0-7018-4c4b-8632-ab4834d73261)
 ---
